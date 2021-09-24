@@ -23,28 +23,28 @@ export class ClienteService {
   };
 
   // Obtem todos os cliente
-  getCars(): Observable<Cliente[]> {
+  getClientes(): Observable<Cliente[]> {
     return this.httpClient
       .get<Cliente[]>(this.url)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   // Obtem um cliente pelo id
-  getCarById(id: number): Observable<Cliente> {
+  getClienteById(id: number): Observable<Cliente> {
     return this.httpClient
       .get<Cliente>(this.url + '/' + id)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   // salva um cliente
-  saveCar(cliente: Cliente): Observable<Cliente> {
+  saveCliente(cliente: Cliente): Observable<Cliente> {
     return this.httpClient
       .post<Cliente>(this.url, JSON.stringify(cliente), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   // atualiza um cliente
-  updateCar(cliente: Cliente): Observable<Cliente> {
+  updateCliente(cliente: Cliente): Observable<Cliente> {
     return this.httpClient
       .put<Cliente>(
         this.url + '/' + cliente.Id,
@@ -55,7 +55,7 @@ export class ClienteService {
   }
 
   // deleta um cliente
-  deleteCar(cliente: Cliente) {
+  deleteCliente(cliente: Cliente) {
     return this.httpClient
       .delete<Cliente>(this.url + '/' + cliente.Id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));

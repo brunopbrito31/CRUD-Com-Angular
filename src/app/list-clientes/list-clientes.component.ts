@@ -3,18 +3,17 @@ import { NgForm } from '@angular/forms';
 import { Cliente } from '../models/Cliente';
 import { ClienteService } from '../services/cliente.service';
 
-
 @Component({
   selector: 'app-list-clientes',
   templateUrl: './list-clientes.component.html',
-  styleUrls: ['./list-clientes.component.css']
+  styleUrls: ['./list-clientes.component.css'],
 })
 export class ListClientesComponent implements OnInit {
-  clientes:Cliente[];
+  clientes: Cliente[];
   cliente = {} as Cliente;
 
   constructor(private clienteService: ClienteService) {}
-  
+
   ngOnInit() {
     this.getClientes();
   }
@@ -22,11 +21,11 @@ export class ListClientesComponent implements OnInit {
   // defini se um cliente será criado ou atualizado
   saveCliente(form: NgForm) {
     if (this.cliente.Id !== undefined) {
-      this.clienteService.updateCar(this.cliente).subscribe(() => {
+      this.clienteService.updateCliente(this.cliente).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.clienteService.saveCar(this.cliente).subscribe(() => {
+      this.clienteService.saveCliente(this.cliente).subscribe(() => {
         this.cleanForm(form);
       });
     }
@@ -34,14 +33,14 @@ export class ListClientesComponent implements OnInit {
 
   // Chama o serviço para obtém todos os clientes
   getClientes() {
-    this.clienteService.getCars().subscribe((clientes: Cliente[]) => {
+    this.clienteService.getClientes().subscribe((clientes: Cliente[]) => {
       this.clientes = clientes;
     });
   }
 
   // deleta um cliente
-  deleteCliente(car: Cliente) {
-    this.clienteService.deleteCar(car).subscribe(() => {
+  deleteCliente(cliente: Cliente) {
+    this.clienteService.deleteCliente(cliente).subscribe(() => {
       this.getClientes();
     });
   }
@@ -57,5 +56,4 @@ export class ListClientesComponent implements OnInit {
     form.resetForm();
     this.cliente = {} as Cliente;
   }
-
 }
