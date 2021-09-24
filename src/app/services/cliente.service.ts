@@ -43,7 +43,7 @@ export class ClienteService {
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  // utualiza um carro
+  // atualiza um cliente
   updateCar(cliente: Cliente): Observable<Cliente> {
     return this.httpClient
       .put<Cliente>(
@@ -54,7 +54,7 @@ export class ClienteService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  // deleta um carro
+  // deleta um cliente
   deleteCar(cliente: Cliente) {
     return this.httpClient
       .delete<Cliente>(this.url + '/' + cliente.Id, this.httpOptions)
